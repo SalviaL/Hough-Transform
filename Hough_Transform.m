@@ -1,27 +1,27 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% ±¾³ÌĞòÓÃÓÚ½øĞĞ»ô·ò±ä»»ÌáÈ¡Ö±Ïß
-% ¶ÁÈëÍ¼Æ¬ÎªRGB¸ñÊ½Í¼Æ¬£¬²»ÄÜÎª»Ò¶È»ò¶şÖµÍ¼Æ¬
-% ĞèÊÖ¶¯ÉèÖÃÍ¼Æ¬ÎÄ¼şÃûºÍÌáÈ¡Ö±ÏßÊıÁ¿
+% æœ¬ç¨‹åºç”¨äºè¿›è¡Œéœå¤«å˜æ¢æå–ç›´çº¿
+% è¯»å…¥å›¾ç‰‡ä¸ºRGBæ ¼å¼å›¾ç‰‡ï¼Œä¸èƒ½ä¸ºç°åº¦æˆ–äºŒå€¼å›¾ç‰‡
+% éœ€æ‰‹åŠ¨è®¾ç½®å›¾ç‰‡æ–‡ä»¶åå’Œæå–ç›´çº¿æ•°é‡
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function Hough_Transform
 
 clc,clear
-img_name='test5.jpg';            %Ö±ÏßÃû
-line_num=6;                      %Ö±ÏßÊıÁ¿
+img_name='test2.jpg';            %ç›´çº¿å
+line_num=6;                      %ç›´çº¿æ•°é‡
 
 %
-%%»ô·ò±ä»»
+%%éœå¤«å˜æ¢
 %
 
-img=double(rgb2gray(imread(img_name)))/255; %Í¼Ïñ»Ò¶È»¯
+img=double(rgb2gray(imread(img_name)))/255; %å›¾åƒç°åº¦åŒ–
 img=imnoise(img,'salt & pepper',0.02);
 [m,~]=size(img);
-Img_Candy=Candy(img);                       %Candy±ßÔµÌáÈ¡
-[r,t]=Hough(Img_Candy,line_num);            %»ô·ò±ä»»
-imshow(img)                                 %Êä³öÔ­Í¼Ïñ
+Img_Candy=Candy(img);                       %Candyè¾¹ç¼˜æå–
+[r,t]=Hough(Img_Candy,line_num);            %éœå¤«å˜æ¢
+imshow(img)                                 %è¾“å‡ºåŸå›¾åƒ
 hold on
 %
-%%»æÖÆÖ±Ïß
+%%ç»˜åˆ¶ç›´çº¿
 %
 for i=1:size(r)
     a=r(i)/cos(t(i));
@@ -34,11 +34,11 @@ end
 end
 
 %
-%»ô·ò±ä»»
+%éœå¤«å˜æ¢
 %
 function [r,t]=Hough(img,line_num)
-t_step=pi/1000; %¦È²½³¤pi/1000
-r_step=0.5;     %¦Ñ²½³¤0.5
+t_step=pi/1000; %Î¸æ­¥é•¿pi/1000
+r_step=0.5;     %Ïæ­¥é•¿0.5
 [m,n]=size(img);
 r=[];
 t=[];
@@ -61,7 +61,7 @@ imshow(Vote,[])
 end
 
 %
-%»ñÈ¡Ç°num¸ö×î´óÖµµã
+%è·å–å‰numä¸ªæœ€å¤§å€¼ç‚¹
 %
 function [r,t]=GetMax(vote,C,num)
 [m,n]=size(vote);
@@ -83,7 +83,7 @@ for count=1:num
     vote(indexi,indexj)=0;
     vote(max(indexi-10,1):min(indexi+10,m),max(indexj-10,1):min(indexj+10,n))=0;
     %
-    %Í¶Æ±Æ÷¿Õ¼ä×ª»ô·ò¿Õ¼ä
+    %æŠ•ç¥¨å™¨ç©ºé—´è½¬éœå¤«ç©ºé—´
     %
     t=[t C{1,2}(indexj)];
     r=[r C{1,1}(indexi)];
